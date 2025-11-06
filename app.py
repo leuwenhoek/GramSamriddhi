@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect
 from myjson import JSONDataModule
 
 app = Flask(__name__)
@@ -33,6 +33,15 @@ def projects():
         "completed": data["completed_projects"]
     }
     return render_template("projects.html", projects=projects_list, summary=summary)
+
+@app.route("/complaints")
+def complaints():
+    return render_template("complaints.html")
+
+@app.route("/submit-complaint", methods=["POST"])
+def submit_complaint():
+    # In real app: save to database, send SMS, assign ticket
+    return redirect("/complaints?success=1")
 
 if __name__ == "__main__":
     app.run(debug=True)
