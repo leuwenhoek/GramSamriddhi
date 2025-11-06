@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% set active_page = 'home' %}
+
+{% block title %}Jitwarpur - Home{% endblock %}
+
+{% block content %}
+<section class="village-hero">
+    <h1 class="section-header">Jitwarpur: Gateway to Mithila Art</h1>
+    <div class="info-card" style="padding: 3rem; background: var(--dark-gray);">
+        
+        <p style="font-size: 1.15rem; color: var(--text-gray); margin-bottom: 2rem; line-height: 1.8;">
+            Welcome to the digital dashboard for <b>Jitwarpur, Madhubani, Bihar</b>. This village is celebrated worldwide as a cradle of <b>Mithila Painting</p>b>, also known as Madhubani Art. It is a vibrant cultural hub where tradition meets technology to drive rural development.
+        </p>
+
+        <h2 style="font-size: 2rem; color: var(--light-blue); margin-bottom: 1.5rem; border-left: 4px solid var(--primary-blue); padding-left: 15px;">
+            The Specialty: Madhubani Painting
+        </h2>
+        
+        <div class="specialty-details" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center;">
+            
+            <div class="image-space">
+                <div style="height: 300px; background-color: var(--dark-blue); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--text-white); font-weight: 600; font-size: 1.2rem; border: 2px dashed var(--light-blue);">
+                    <img src="{{ url_for('static', filename='image/madhubani_painting.jpeg') }}" alt="Description" style="width: 482px; border-radius: 3%; height: 300px;">
+                </div>
+            </div>
+
+            <div class="text-content">
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem; color: var(--text-gray); font-size: 1rem;">
+                        <span style="color: var(--primary-blue); font-weight: 700;">Artistic Heritage:</span> Madhubani painting, traditionally done by women, uses natural dyes and pigments to depict religious themes, nature, and geometric patterns. Jitwarpur has produced many National Award-winning artists.
+                    </li>
+                    <li style="margin-bottom: 1rem; color: var(--text-gray); font-size: 1rem;">
+                        <span style="color: var(--primary-blue); font-weight: 700;">Economic Impact:</span> The art sustains a large portion of the village economy. This dashboard supports local artisans through project visibility and complaint redressal.
+                    </li>
+                    <li style="margin-bottom: 1rem; color: var(--text-gray); font-size: 1rem;">
+                        <span style="color: var(--primary-blue); font-weight: 700;">Cultural Focus:</span> We aim to preserve and promote this art by digitizing records and streamlining administrative processes for local craftspeople.
+                    </li>
+                </ul>
+                <a href="/dashboard/projects" class="btn-action" style="margin-top: 1.5rem;">View Artisan Support Projects</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="quick-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem;">
+    <div class="info-card" style="text-align: center;">
+        <h3 style="color: var(--light-blue); font-size: 2.2rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">450+</h3>
+        <p style="color: var(--text-gray);">Registered Artisans</p>
+    </div>
+    <div class="info-card" style="text-align: center;">
+        <h3 style="color: var(--light-blue); font-size: 2.2rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">98%</h3>
+        <p style="color: var(--text-gray);">Electrification Rate</p>
+    </div>
+    <div class="info-card" style="text-align: center;">
+        <h3 style="color: var(--light-blue); font-size: 2.2rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">23</h3>
+        <p style="color: var(--text-gray);">Active Projects</p>
+    </div>
+</section>
+{% endblock %}
