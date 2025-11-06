@@ -1,0 +1,136 @@
+<!-- templates/projects.html -->
+{% extends "base.html" %}
+{% set active_page = 'projects' %}
+
+{% block title %}Village Projects Dashboard{% endblock %}
+
+{% block content %}
+<section class="projects-dashboard">
+    <h1 class="section-header">Village Development Projects</h1>
+
+    <!-- Summary Cards -->
+    <div class="metrics-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem;">
+        <div class="info-card" style="text-align:center;border-left:5px solid #10b981;">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Total Projects</p>
+            <h3 style="color:#10b981;font-size:2.5rem;font-weight:800;">{{ summary.total }}</h3>
+        </div>
+        <div class="info-card" style="text-align:center;border-left:5px solid #3b82f6;">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Active Projects</p>
+            <h3 style="color:#3b82f6;font-size:2.5rem;font-weight:800;">{{ summary.active }}</h3>
+        </div>
+        <div class="info-card" style="text-align:center;border-left:5px solid #f59e0b;">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Completed</p>
+            <h3 style="color:#f59e0b;font-size:2.5rem;font-weight:800;">{{ summary.completed }}</h3>
+        </div>
+    </div>
+
+    <!-- Projects by Category Graph -->
+    <div class="info-card">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Projects Distribution by Category
+        </h2>
+        <div class="graph-container" style="text-align:center;padding:1.5rem 0;">
+            <img src="{{ url_for('static', filename='projects/projects_graph.png') }}" 
+                 alt="Projects by Category" 
+                 style="max-width:100%;height:auto;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.5);border:1px solid var(--border-color);">
+            <p style="color:var(--text-gray);margin-top:1rem;font-size:.85rem;">
+                Source: Jitwarpur Village Development Records
+            </p>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="info-card" style="margin-top:2rem;">
+        <div class="filter-tabs" style="display:flex;gap:1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);">
+            <button class="tab-btn active" onclick="filterProjects('all')" style="padding:.75rem 1.5rem;background:var(--dark-blue);color:white;border:none;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;">All Projects</button>
+            <button class="tab-btn" onclick="filterProjects('Active')" style="padding:.75rem 1.5rem;background:var(--card-bg);color:var(--text-white);border:none;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;">Active</button>
+            <button class="tab-btn" onclick="filterProjects('Completed')" style="padding:.75rem 1.5rem;background:var(--card-bg);color:var(--text-white);border:none;border-radius:8px 8px 0 0;cursor:pointer;font-weight:600;">Completed</button>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="projects-table-container" style="overflow-x:auto;">
+            <table id="projectsTable" style="width:100%;border-collapse:collapse;">
+                <thead>
+                    <tr style="background:var(--dark-gray);">
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">ID</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Project Name</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Category</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Status</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Progress</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Budget (₹)</th>
+                        <th style="padding:15px;color:var(--text-white);text-align:left;">Lead Agency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in projects %}
+                    <tr class="project-row" data-status="{{ p.status }}" style="border-bottom:1px solid rgba(255,255,255,.05);transition:all .3s;">
+                        <td style="padding:15px;color:var(--light-blue);font-weight:600;">{{ p.project_id }}</td>
+                        <td style="padding:15px;">
+                            <strong>{{ p.name }}</strong>
+                            <br><small style="color:var(--text-gray);">{{ p.description[:80] }}{% if p.description|length > 80 %}...{% endif %}</small>
+                        </td>
+                        <td style="padding:15px;">
+                            <span class="category-tag" style="padding:4px 10px;border-radius:20px;font-size:.75rem;background:#374151;color:white;">{{ p.category }}</span>
+                        </td>
+                        <td style="padding:15px;">
+                            <span class="status-badge {{ 'active' if p.status == 'Active' else 'completed' }}" 
+                                  style="padding:5px 12px;border-radius:20px;font-size:.8rem;font-weight:600;
+                                         background:{% if p.status == 'Active' %}#10b981{% else %}#f59e0b{% endif %};color:white;">
+                                {{ p.status }}
+                            </span>
+                        </td>
+                        <td style="padding:15px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div style="flex:1;background:#374151;border-radius:10px;height:8px;overflow:hidden;">
+                                    <div style="width:{{ p.progress_percentage }}%;height:100%;background:{% if p.progress_percentage >= 90 %}#10b981{% elif p.progress_percentage >= 70 %}#3b82f6{% else %}#f59e0b{% endif %};transition:width .3s;"></div>
+                                </div>
+                                <span style="font-size:.9rem;font-weight:600;">{{ p.progress_percentage }}%</span>
+                            </div>
+                        </td>
+                        <td style="padding:15px;">₹{{ "{:,}".format(p.budget_allocated) }}</td>
+                        <td style="padding:15px;">{{ p.lead_agency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <div style="text-align:center;margin-top:3rem;">
+        <a href="#" class="btn-action" style="font-size:1.1rem;padding:1rem 2rem;background:#3b82f6;">
+            Submit New Project Proposal
+        </a>
+    </div>
+</section>
+
+<script>
+function filterProjects(status) {
+    const rows = document.querySelectorAll('.project-row');
+    const buttons = document.querySelectorAll('.tab-btn');
+    
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    rows.forEach(row => {
+        if (status === 'all' || row.dataset.status === status) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+}
+
+// Initialize with all projects
+document.addEventListener('DOMContentLoaded', () => {
+    filterProjects('all');
+});
+</script>
+
+<style>
+.status-badge.active { background: #10b981; }
+.status-badge.completed { background: #f59e0b; }
+.tab-btn.active { background: var(--primary-blue) !important; color: white !important; }
+.project-row:hover { background: rgba(59, 130, 246, 0.1); }
+</style>
+{% endblock %}
