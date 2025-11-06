@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% set active_page = 'water' %}
+
+{% block title %}Water Supply Data{% endblock %}
+
+{% block content %}
+<section class="electricity-dashboard">
+    <h1 class="section-header">Water Supply Performance & Metrics</h1>
+
+    <!-- ---------- METRICS ---------- -->
+    <div class="metrics-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem;">
+        <div class="info-card" style="text-align:center;border-left:5px solid var(--primary-blue);">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Avg. Monthly Consumption</p>
+            <h3 style="color:var(--light-blue);font-size:2.5rem;font-family:'Space Grotesk',sans-serif;font-weight:800;">
+                {{ (data|sum(attribute='consumption_kl') / data|length)|round(0) }} kL
+            </h3>
+        </div>
+
+        <div class="info-card" style="text-align:center;border-left:5px solid #1e90ff;">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Total Shortage Days ({{ data|length }} Months)</p>
+            <h3 style="color:#fb923c;font-size:2.5rem;font-family:'Space Grotesk',sans-serif;font-weight:800;">
+                {{ data|sum(attribute='shortage_days') }} Days
+            </h3>
+        </div>
+
+        <div class="info-card" style="text-align:center;border-left:5px solid #4ade80;">
+            <p style="color:var(--text-gray);font-size:.9rem;text-transform:uppercase;margin-bottom:.5rem;">Current Supply Status</p>
+            <h3 style="color:#4ade80;font-size:2.5rem;font-family:'Space Grotesk',sans-serif;font-weight:800;text-shadow:0 0 10px rgba(74,222,128,.5);">AVAILABLE</h3>
+        </div>
+    </div>
+
+    <!-- ---------- GRAPH ---------- -->
+    <div class="info-card">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Yearly Water Consumption & Shortage Trend
+        </h2>
+        <div class="graph-container" style="text-align:center;padding:1.5rem 0;">
+            <img src="{{ url_for('static', filename='water/water_graph.png') }}"
+                 alt="Water Supply Trend Graph"
+                 style="max-width:100%;height:auto;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.5);border:1px solid var(--border-color);">
+            <p style="color:var(--text-gray);margin-top:1rem;font-size:.85rem;">
+                Source: Village Water Supply Sensor Data ({{ data|length }} Months)
+            </p>
+        </div>
+    </div>
+
+    <!-- ---------- MONTHLY TABLE ---------- -->
+    <div class="info-card">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Detailed Monthly Report (Jitwarpur Village)
+        </h2>
+
+        <table style="width:100%;border-collapse:collapse;text-align:left;">
+            <thead>
+                <tr style="background:var(--dark-gray);border-bottom:2px solid var(--primary-blue);">
+                    <th style="padding:15px;color:var(--text-white);font-weight:600;">Month</th>
+                    <th style="padding:15px;color:var(--text-white);font-weight:600;">Consumption (kL)</th>
+                    <th style="padding:15px;color:var(--text-white);font-weight:600;">Bill (₹)</th>
+                    <th style="padding:15px;color:var(--text-white);font-weight:600;">Supply Days</th>
+                    <th style="padding:15px;color:var(--text-white);font-weight:600;">Shortage Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in data %}
+                <tr style="border-bottom:1px solid rgba(255,255,255,.05);transition:background .3s;">
+                    <td style="padding:15px;color:var(--light-blue);font-weight:600;">{{ entry.month }}</td>
+                    <td style="padding:15px;">{{ entry.consumption_kl }}</td>
+                    <td style="padding:15px;">₹{{ entry.bill_rupees }}</td>
+                    <td style="padding:15px;">{{ entry.supply_days }}</td>
+                    <td style="padding:15px;
+                               color:{% if entry.shortage_days > 5 %}#ef4444{% else %}var(--text-white){% endif %};
+                               font-weight:{% if entry.shortage_days > 5 %}700{% else %}400{% endif %};">
+                        {{ entry.shortage_days }}
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <!-- TOTAL ROW -->
+                <tr style="background:var(--dark-blue);font-weight:700;">
+                    <td style="padding:15px;color:var(--text-white);">TOTAL</td>
+                    <td style="padding:15px;color:var(--text-white);">{{ data|sum(attribute='consumption_kl') }}</td>
+                    <td style="padding:15px;color:var(--text-white);">₹{{ data|sum(attribute='bill_rupees') }}</td>
+                    <td style="padding:15px;color:var(--text-white);">{{ data|sum(attribute='supply_days') }}</td>
+                    <td style="padding:15px;color:var(--text-white);">{{ data|sum(attribute='shortage_days') }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;">
+        <a href="/complaints" class="btn-action" style="font-size:1.1rem;padding:1rem 2rem;">
+            Report Water Supply Issue
+        </a>
+    </div>
+</section>
+{% endblock %}
