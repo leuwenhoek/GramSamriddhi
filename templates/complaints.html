@@ -1,0 +1,185 @@
+<!-- templates/complaints.html -->
+{% extends "base.html" %}
+{% set active_page = 'complaints' %}
+
+{% block title %}Submit Complaint{% endblock %}
+
+{% block content %}
+<section class="complaints-form">
+    <h1 class="section-header">Report an Issue in Jitwarpur</h1>
+
+    <div class="info-card" style="max-width:800px;margin:0 auto;">
+        <form action="/submit-complaint" method="POST" class="complaint-form" style="display:grid;gap:1.5rem;">
+            
+            <!-- Complainant Details -->
+            <div class="form-section">
+                <h3 style="color:var(--primary-blue);margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:8px;">
+                    Your Information
+                </h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div>
+                        <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Full Name *</label>
+                        <input type="text" name="name" required 
+                               style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;"
+                               placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Phone Number *</label>
+                        <input type="tel" name="phone" required 
+                               style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;"
+                               placeholder="10-digit mobile number">
+                    </div>
+                </div>
+                <div style="margin-top:1rem;">
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Address / Locality *</label>
+                    <input type="text" name="address" required 
+                           style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;"
+                           placeholder="House no., street, landmark">
+                </div>
+            </div>
+
+            <!-- Issue Details -->
+            <div class="form-section">
+                <h3 style="color:var(--primary-blue);margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:8px;">
+                    Issue Details
+                </h3>
+                <div>
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Issue Type *</label>
+                    <select name="issue_type" required 
+                            style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;">
+                        <option value="">Select an issue</option>
+                        <option value="Electricity">Electricity Outage / Fault</option>
+                        <option value="Water">No Water Supply / Leakage</option>
+                        <option value="Road">Potholes / Damaged Road</option>
+                        <option value="Sanitation">Garbage Collection Issue</option>
+                        <option value="Streetlight">Streetlight Not Working</option>
+                        <option value="Drainage">Blocked Drainage / Overflow</option>
+                        <option value="Health">Health Center Issue</option>
+                        <option value="School">School Infrastructure</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div style="margin-top:1rem;">
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Location of Issue *</label>
+                    <input type="text" name="location" required 
+                           style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;"
+                           placeholder="Exact location, pole number, handpump ID, etc.">
+                </div>
+
+                <div style="margin-top:1rem;">
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Description *</label>
+                    <textarea name="description" required rows="5"
+                              style="width:100%;padding:12px;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:white;resize:vertical;"
+                              placeholder="Describe the issue in detail..."></textarea>
+                </div>
+
+                <div style="margin-top:1rem;">
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Attach Photo (Optional)</label>
+                    <input type="file" name="photo" accept="image/*"
+                           style="width:100%;padding:8px;border:1px dashed var(--border-color);border-radius:8px;background:var(--card-bg);color:white;">
+                    <small style="color:var(--text-gray);font-size:.75rem;">Max size: 5MB (JPG, PNG)</small>
+                </div>
+            </div>
+
+            <!-- Priority & Follow-up -->
+            <div class="form-section">
+                <h3 style="color:var(--primary-blue);margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:8px;">
+                    Priority & Follow-up
+                </h3>
+                <div>
+                    <label style="display:block;color:var(--text-gray);font-size:.9rem;margin-bottom:.5rem;">Urgency Level *</label>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;">
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                            <input type="radio" name="urgency" value="Low" required>
+                            <span style="color:#f59e0b;">Low</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                            <input type="radio" name="urgency" value="Medium" required>
+                            <span style="color:#3b82f6;">Medium</span>
+                        </label>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                            <input type="radio" name="urgency" value="High" required>
+                            <span style="color:#ef4444;">High</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-top:1rem;">
+                    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+                        <input type="checkbox" name="anonymous">
+                        <span style="color:var(--text-gray);font-size:.9rem;">Submit anonymously</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div style="text-align:center;margin-top:2rem;">
+                <button type="submit" class="btn-action" 
+                        style="font-size:1.1rem;padding:1rem 3rem;background:#10b981;border:none;border-radius:8px;color:white;cursor:pointer;">
+                    Submit Complaint
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Recent Complaints Preview -->
+    <div class="info-card" style="max-width:800px;margin:3rem auto 0;">
+        <h3 style="color:var(--primary-blue);margin-bottom:1rem;">Recent Complaints</h3>
+        <div class="complaint-preview" style="border:1px solid var(--border-color);border-radius:8px;padding:1rem;margin-bottom:1rem;background:rgba(59,130,246,.05);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <strong>#C001</strong> - <span style="color:#f59e0b;">Water Supply</span>
+                    <p style="margin:8px 0 0;font-size:.9rem;color:var(--text-gray);">
+                        No water since 3 days in Ward 5 near Hanuman Temple
+                    </p>
+                </div>
+                <span class="status-badge" style="background:#ef4444;color:white;padding:4px 10px;border-radius:20px;font-size:.75rem;">
+                    Urgent
+                </span>
+            </div>
+            <small style="color:var(--text-gray);display:block;margin-top:8px;">
+                Reported 2 hours ago • Status: Assigned to PHED Team
+            </small>
+        </div>
+
+        <div class="complaint-preview" style="border:1px solid var(--border-color);border-radius:8px;padding:1rem;background:rgba(16,185,129,.05);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <strong>#C002</strong> - <span style="color:#3b82f6;">Streetlight</span>
+                    <p style="margin:8px 0 0;font-size:.9rem;color:var(--text-gray);">
+                        Pole #SL-23 not working near Girls School
+                    </p>
+                scorching
+                </div>
+                <span class="status-badge" style="background:#10b981;color:white;padding:4px 10px;border-radius:20px;font-size:.75rem;">
+                    Resolved
+                </span>
+            </div>
+            <small style="color:var(--text-gray);display:block;margin-top:8px;">
+                Reported 1 day ago • Fixed in 6 hours
+            </small>
+        </div>
+    </div>
+</section>
+
+<style>
+.complaint-form input:focus,
+.complaint-form textarea:focus,
+.complaint-form select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,.3);
+}
+.form-section {
+    padding:1.5rem;
+    background:var(--card-bg);
+    border-radius:12px;
+    border:1px solid var(--border-color);
+}
+.btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16,185,129,.3);
+}
+</style>
+{% endblock %}
