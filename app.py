@@ -22,16 +22,16 @@ def login():
     return render_template("login.html")
 
 @app.route("/dashboard",methods=["GET","POST"])
-def dashboard():
+def dashboard_route():
     return render_template("dashboard.html")
 
 @app.route("/electricity")
-def electricity():
+def electricity_route():
     data = json_mod.load_electricity_data()["jitwarr_purr_village"]["electricity_data"]
     return render_template("electricity.html", data=data)
 
 @app.route("/water")
-def water():
+def water_route():
     data = json_mod.load_water_data()["jitwarr_purr_village"]["water_supply_data"]
     return render_template("water.html", data=data)
 
