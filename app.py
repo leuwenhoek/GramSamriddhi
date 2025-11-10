@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template,redirect
+from flask import Flask,request , render_template,redirect
 from myjson import JSONDataModule
 
 app = Flask(__name__)
@@ -10,7 +10,22 @@ json_mod.save_all_data()
 json_mod.plot_all()
 
 @app.route("/")
-def dashboard():
+def home():
+    return redirect("/login")
+
+@app.route("/login",methods=["GET","POST"])
+def login():
+    if request.method == 'POST':
+        village_id = request.form.get("village_id")
+        password = request.form.get("password")
+        if village_id.lower() == "jitwarpur-10" and password == "12345":
+            return redirect("dashboard")
+    if request.method == 'GET':
+        return render_template("login.html")
+    return render_template("login.html")
+
+@app.route("/dashboard")
+def dash():
     return render_template("dashboard.html")
 
 @app.route("/electricity")
@@ -40,8 +55,15 @@ def complaints():
 
 @app.route("/submit-complaint", methods=["POST"])
 def submit_complaint():
-    # In real app: save to database, send SMS, assign ticket
     return redirect("/complaints?success=1")
+
+@app.route("/more")
+def about():
+    return render_template("more.html")
+
+@app.route("/panchayat")
+def panchayat():
+    return render_template("panchayat.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
