@@ -1,0 +1,222 @@
+<!-- templates/about.html -->
+{% extends "base.html" %}
+{% set active_page = 'about' %}
+
+{% block title %}About Jitwarpur – People, Artisans & Schemes{% endblock %}
+
+{% block content %}
+<section class="about-page">
+    <h1 class="section-header">About Jitwarpur Village</h1>
+
+    <!-- Village Overview -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;">
+            <div>
+                <h2 style="color:var(--primary-blue);margin-bottom:1rem;">Welcome to Jitwarpur</h2>
+                <p style="color:var(--text-white);line-height:1.8;font-size:1.05rem;">
+                    A vibrant rural community in <strong>Bihar, India</strong> with a rich cultural heritage, 
+                    resilient people, and a strong tradition of craftsmanship. Home to <strong>3,200+ residents</strong>, 
+                    Jitwarpur is a model of sustainable village development through community participation 
+                    and government schemes.
+                </p>
+                <div style="margin-top:1.5rem;display:flex;gap:2rem;">
+                    <div>
+                        <strong style="color:#3b82f6;">Population</strong><br>
+                        <span style="font-size:1.5rem;font-weight:700;color:white;">3,200+</span>
+                    </div>
+                    <div>
+                        <strong style="color:#10b981;">Households</strong><br>
+                        <span style="font-size:1.5rem;font-weight:700;color:white;">680</span>
+                    </div>
+                    <div>
+                        <strong style="color:#f59e0b;">Literacy Rate</strong><br>
+                        <span style="font-size:1.5rem;font-weight:700;color:white;">78%</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <img src="{{ url_for('static', filename='image/village.jpg') }}" 
+                     alt="Jitwarpur Village" 
+                     style="max-width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.6);border:1px solid var(--border-color);">
+                <small style="color:var(--text-gray);display:block;margin-top:.5rem;">
+                    Aerial view of Jitwarpur – A Green & Growing Village
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local Artisans -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Local Artisans & Crafts
+        </h2>
+        <p style="color:var(--text-white);margin-bottom:1.5rem;">
+            Jitwarpur is renowned for its traditional artisans who preserve centuries-old crafts. 
+            Their work supports local economy and cultural identity.
+        </p>
+
+        <div class="artisans-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+            <div class="artisan-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:80px;height:80px;background:#f59e0b;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:2rem;">Pottery</span>
+                </div>
+                <h3 style="color:#f59e0b;margin-bottom:.5rem;">Pottery Makers</h3>
+                <p style="color:var(--text-gray);font-size:.95rem;">
+                    45+ families craft eco-friendly clay pots, diyas, and decorative items. 
+                    Annual turnover: <strong>₹8.2 lakh</strong>
+                </p>
+            </div>
+
+            <div class="artisan-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:80px;height:80px;background:#3b82f6;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:2rem;">Weaving</span>
+                </div>
+                <h3 style="color:#3b82f6;margin-bottom:.5rem;">Handloom Weavers</h3>
+                <p style="color:var(--text-gray);font-size:.95rem;">
+                    32 women produce Madhubani sarees and stoles. 
+                    Linked with <strong>e-NAM & GeM</strong> for online sales.
+                </p>
+            </div>
+
+            <div class="artisan-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:80px;height:80px;background:#10b981;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;">
+                    <span style="font-size:2rem;">Bamboo</span>
+                </div>
+                <h3 style="color:#10b981;margin-bottom:.5rem;">Bamboo Craftsmen</h3>
+                <p style="color:var(--text-gray);font-size:.95rem;">
+                    28 artisans make furniture, baskets, and eco-products. 
+                    Export to Patna & Delhi via <strong>KVIC</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="#" class="btn-action" style="background:#8b5cf6;">
+                Explore Artisan Marketplace
+            </a>
+        </div>
+    </div>
+
+    <!-- Community Leaders & People -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Community Leaders & Key People
+        </h2>
+
+        <div class="leaders-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
+            <div class="leader-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;display:flex;gap:1rem;align-items:center;">
+                <div style="width:60px;height:60px;background:#3b82f6;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                    <strong style="color:white;display:block;">Smt. Rekha Devi</strong>
+                    <small style="color:#60a5fa;">Sarpanch (2018–Present)</small>
+                    <p style="margin:4px 0 0;font-size:.85rem;color:var(--text-gray);">
+                        Led 23+ development projects. Focus: Women empowerment & sanitation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="leader-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;display:flex;gap:1rem;align-items:center;">
+                <div style="width:60px;height:60px;background:#10b981;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                    <strong style="color:white;display:block;">Shri Ram Kumar Yadav</strong>
+                    <small style="color:#34d399;">SHG Federation President</small>
+                    <p style="margin:4px 0 0;font-size:.85rem;color:var(--text-gray);">
+                        Manages 48 women SHGs. ₹42 lakh revolving fund.
+                    </p>
+                </div>
+            </div>
+
+            <div class="leader-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;display:flex;gap:1rem;align-items:center;">
+                <div style="width:60px;height:60px;background:#f59e0b;border-radius:50%;flex-shrink:0;"></div>
+                <div>
+                    <strong style="color:white;display:block;">Dr. Anjali Sharma</strong>
+                    <small style="color:#fbbf24;">PHC Medical Officer</small>
+                    <p style="margin:4px 0 0;font-size:.85rem;color:var(--text-gray);">
+                        Upgraded health center. 100% institutional deliveries.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Government & Local Schemes -->
+    <div class="info-card">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Active Government & Local Schemes
+        </h2>
+
+        <div class="schemes-container" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <!-- Government Schemes -->
+            <div>
+                <h3 style="color:#3b82f6;margin-bottom:1rem;">Central & State Schemes</h3>
+                <ul style="list-style:none;padding:0;margin:0;">
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>PMAY-G</strong> – 25 pucca houses completed
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>Jal Jeevan Mission</strong> – 95% household tap connections
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>MGNREGA</strong> – 42,000+ person-days generated
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>PM-KISAN</strong> – 580 farmers enrolled
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;">
+                        <strong>POSHAN Abhiyaan</strong> – 12 nutrition gardens
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Local Initiatives -->
+            <div>
+                <h3 style="color:#10b981;margin-bottom:1rem;">Village-Led Initiatives</h3>
+                <ul style="list-style:none;padding:0;margin:0;">
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>Artisan Cooperative</strong> – Online sales portal
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>Seed Bank</strong> – 300+ farmers benefit
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>Digital Literacy Drive</strong> – 240 seniors trained
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;margin-bottom:.75rem;">
+                        <strong>Waste Recycling Unit</strong> – 1.5 tons/month processed
+                    </li>
+                    <li style="padding:.75rem 1rem;background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;">
+                        <strong>Community Radio</strong> – Daily local broadcasts
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="/projects" class="btn-action" style="background:#8b5cf6;">
+                View All 40+ Projects
+            </a>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div style="text-align:center;margin:4rem 0;">
+        <p style="font-size:1.1rem;color:var(--text-white);margin-bottom:1.5rem;">
+            Want to contribute or collaborate?
+        </p>
+        <a href="/complaints" class="btn-action" style="background:#ef4444;font-size:1.1rem;padding:1rem 2.5rem;">
+            Report an Issue or Idea
+        </a>
+    </div>
+</section>
+
+<style>
+.artisan-card, .leader-card {
+    transition: all .3s;
+}
+.artisan-card:hover, .leader-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+    border-color: #3b82f6;
+}
+</style>
+{% endblock %}

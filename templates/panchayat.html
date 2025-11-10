@@ -1,0 +1,207 @@
+<!-- templates/panchayat.html -->
+{% extends "base.html" %}
+{% set active_page = 'panchayat' %}
+
+{% block title %}Panchayat Office – Jitwarpur{% endblock %}
+
+{% block content %}
+<section class="panchayat-office">
+    <h1 class="section-header">Jitwarpur Gram Panchayat Office</h1>
+
+    <!-- Hero Banner -->
+    <div class="info-card" style="margin-bottom:3rem;background:linear-gradient(135deg, rgba(59,130,246,.9), rgba(16,185,129,.9)), url('{{ url_for('static', filename='images/panchayat_office.jpg') }}') no-repeat center/cover;border-radius:16px;padding:3rem;color:white;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.3);"></div>
+        <div style="position:relative;z-index:2;">
+            <h2 style="font-size:2.5rem;margin-bottom:1rem;">Serving the Community Since 1952</h2>
+            <p style="font-size:1.2rem;max-width:700px;margin:0 auto 1.5rem;">
+                Your trusted local government body for development, welfare, and grievance redressal.
+            </p>
+            <div style="display:flex;justify-content:center;gap:1.5rem;font-size:1.1rem;">
+                <div><strong>Office Hours:</strong> 10:00 AM – 4:00 PM (Mon–Sat)</div>
+                <div><strong>Emergency:</strong> +91 98350 12345</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact & Location -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div>
+                <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;">Contact Information</h2>
+                <div style="space-y:1rem;">
+                    <div style="display:flex;gap:1rem;align-items:center;">
+                        <div style="margin: 6px; width:91px;height:91px;background:#3b82f6;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">Location</div>
+                        <div>
+                            <strong>Jitwarpur Gram Panchayat Bhawan</strong><br>
+                            <span style="color:var(--text-gray);">Near Middle School, Ward No. 4, Jitwarpur, Bihar 847XXX</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:1rem;align-items:center;">
+                        <div style="margin: 6px; width:91px;height:91px;background:#10b981;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">Phone</div>
+                        <div>
+                            <strong>+91 98350 12345</strong> (Sarpanch)<br>
+                            <span style="color:var(--text-gray);">+91 75440 98765 (Panchayat Secretary)</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:1rem;align-items:center;">
+                        <div style="margin: 6px; width:91px;height:91px;background:#f59e0b;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">Email</div>
+                        <div>
+                            <strong>jitwarpur.panchayat@gmail.com</strong><br>
+                            <span style="color:var(--text-gray);">For official correspondence & RTI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;">Location Map</h2>
+                <div style="height:250px;background:#1a1a2e;border:1px solid var(--border-color);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-gray);">
+                    <p style="text-align:center;">
+                        Interactive Google Map Embed<br>
+                        <small>(Replace with real map in production)</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Office Bearers -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Elected Representatives & Staff
+        </h2>
+
+        <div class="officials-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">
+            <div class="official-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:90px;height:90px;background:#3b82f6;border-radius:50%;margin:0 auto 1rem;"></div>
+                <h3 style="color:white;margin-bottom:.25rem;">Smt. Rekha Devi</h3>
+                <p style="color:#60a5fa;font-weight:600;margin-bottom:.5rem;">Sarpanch</p>
+                <p style="color:var(--text-gray);font-size:.9rem;">
+                    Elected: 2018, 2023 | Ward: All<br>
+                    <em>"Empowering women, building futures"</em>
+                </p>
+            </div>
+
+            <div class="official-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:90px;height:90px;background:#10b981;border-radius:50%;margin:0 auto 1rem;"></div>
+                <h3 style="color:white;margin-bottom:.25rem;">Shri Rajesh Kumar</h3>
+                <p style="color:#34d399;font-weight:600;margin-bottom:.5rem;">Up-Sarpanch</p>
+                <p style="color:var(--text-gray);font-size:.9rem;">
+                    Ward 3 Representative<br>
+                    Focus: Infrastructure & Roads
+                </p>
+            </div>
+
+            <div class="official-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:1.5rem;text-align:center;">
+                <div style="width:90px;height:90px;background:#8b5cf6;border-radius:50%;margin:0 auto 1rem;"></div>
+                <h3 style="color:white;margin-bottom:.25rem;">Shri Anil Prasad</h3>
+                <p style="color:#c4b5fd;font-weight:600;margin-bottom:.5rem;">Panchayat Secretary</p>
+                <p style="color:var(--text-gray);font-size:.9rem;">
+                    Appointed: 2019<br>
+                    Manages records, funds, and schemes
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top:2rem;padding:1rem;background:rgba(59,130,246,.1);border-radius:8px;text-align:center;">
+            <p style="margin:0;color:var(--text-white);">
+                <strong>Ward Members:</strong> 12 elected representatives (1 per ward + reserved seats)
+            </p>
+        </div>
+    </div>
+
+    <!-- Services Offered -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Services Available at Panchayat Office
+        </h2>
+
+        <div class="services-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">Birth Certificate</div>
+                <small style="color:var(--text-gray);">Birth & Death Registration</small>
+            </div>
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">Income Certificate</div>
+                <small style="color:var(--text-gray);">Income & Caste Certificates</small>
+            </div>
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">House</div>
+                <small style="color:var(--text-gray);">Property Tax & Mutation</small>
+            </div>
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">File</div>
+                <small style="color:var(--text-gray);">RTI & Grievance Filing</small>
+            </div>
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">Handshake</div>
+                <small style="color:var(--text-gray);">Scheme Enrollment Help</small>
+            </div>
+            <div class="service-item" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1.2rem;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:.5rem;">Vote</div>
+                <small style="color:var(--text-gray);">Voter ID & Election Info</small>
+            </div>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="/complaints" class="btn-action" style="background:#f59e0b;">
+                File Online Complaint
+            </a>
+        </div>
+    </div>
+
+    <!-- Office Timings & Holidays -->
+    <div class="info-card" style="margin-bottom:3rem;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            Office Timings & Holidays
+        </h2>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+            <div>
+                <h3 style="color:#3b82f6;margin-bottom:1rem;">Working Hours</h3>
+                <table style="width:100%;border-collapse:collapse;">
+                    <tr><td style="padding:.75rem;border-bottom:1px solid var(--border-color);"><strong>Monday – Saturday</strong></td><td style="padding:.75rem;border-bottom:1px solid var(--border-color);text-align:right;">10:00 AM – 4:00 PM</td></tr>
+                    <tr><td style="padding:.75rem;border-bottom:1px solid var(--border-color);"><strong>Sunday & 2nd Saturday</strong></td><td style="padding:.75rem;border-bottom:1px solid var(--border-color);text-align:right;color:#ef4444;">Closed</td></tr>
+                    <tr><td style="padding:.75rem;"><strong>Lunch Break</strong></td><td style="padding:.75rem;text-align:right;">1:00 PM – 1:30 PM</td></tr>
+                </table>
+            </div>
+            <div>
+                <h3 style="color:#f59e0b;margin-bottom:1rem;">Public Holidays (2025)</h3>
+                <ul style="margin:0;padding-left:1.2rem;list-style:disc;color:var(--text-gray);">
+                    <li>Republic Day – Jan 26</li>
+                    <li>Holi – March 14</li>
+                    <li>Independence Day – Aug 15</li>
+                    <li>Diwali – Nov 1–3</li>
+                    <li>Chhath Puja – Nov 7–10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="text-align:center;margin:3rem 0;">
+        <h2 style="color:var(--primary-blue);margin-bottom:1.5rem;">Need Help?</h2>
+        <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+            <a href="tel:+919835012345" class="btn-action" style="background:#10b981;padding:1rem 2rem;">
+                Call Office
+            </a>
+            <a href="mailto:jitwarpur.panchayat@gmail.com" class="btn-action" style="background:#3b82f6;padding:1rem 2rem;">
+                Send Email
+            </a>
+            <a href="/complaints" class="btn-action" style="background:#ef4444;padding:1rem 2rem;">
+                File Complaint
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.official-card, .service-item {
+    transition: all .3s ease;
+}
+.official-card:hover, .service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.4);
+    border-color: #3b82f6;
+}
+</style>
+{% endblock %}
